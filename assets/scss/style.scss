@@ -1,0 +1,222 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
+
+:root {
+    --first-color: black;
+    --second-color: white;
+    --body-font: "Source Sans 3", Arial, Helvetica, sans-serif;
+    --h1-font-size: 1.1rem;
+    --h2-font-size: 0.8rem;
+    --normal-font-size: 0.5rem;
+    --big-font-size: 2rem;
+    --smaller-font-size: 0.4rem;
+    --z-fixed: 100;
+}
+
+@media screen and (min-width: 768px) {
+    :root {
+        --h1-font-size: 2.3rem;
+        --h2-font-size: 1.9rem;
+        --normal-font-size: 1.0rem;
+        --big-font-size: 3.5rem;
+        --smaller-font-size: 0.5rem;
+    }
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--body-font);
+    font-weight: initial;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: var(--first-color);
+}
+
+a {
+    text-decoration: none;
+}
+
+
+p {
+    text-align: justify;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    text-align: justify;
+}
+
+.fixed-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: var(--first-color);
+    z-index: var(--z-fixed);
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid rgb(190, 190, 190);
+
+    nav {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 3rem;
+        padding: 0;
+        margin: 0;
+
+        li {
+            a {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                img {
+                    width: 60px;
+                    height: 60px;
+                    object-fit: contain;
+                }
+            }
+        }
+    }
+
+    .menu-toggle {
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 6px;
+        cursor: pointer;
+
+        span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--second-color);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+    }
+}
+
+.parallax-container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.parallax-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    opacity: 0;
+    transition: opacity 10s ease-in-out;
+    will-change: opacity;
+}
+
+.content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    text-align: center;
+    color: var(--second-color);
+    padding: 20px;
+    font-size: var(--h1-font-size);
+    opacity: 0;
+    transition: opacity 3s ease-in-out;
+    will-change: opacity;
+}
+
+body.loaded .parallax-background,
+body.loaded .content {
+    opacity: 1;
+}
+
+body.hide-content .content {
+    animation: fadeOut 3s forwards;
+}
+
+.section {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    padding: 2rem;
+    background-color: var(--first-color);
+    color: var(--second-color);
+}
+
+.section.alt {
+    background-color: var(--first-color);
+    color: var(--second-color);
+}
+
+.inner {
+    max-width: 800px;
+}
+
+.has-submenu {
+    position: relative;
+
+    .submenu {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: var(--first-color);
+        border: 1px solid var(--second-color);
+        border-radius: 0.5rem;
+        padding: 0.5rem;
+        z-index: var(--z-fixed);
+        white-space: nowrap;
+
+        li {
+            margin: 0.3rem 0;
+
+            a {
+                color: var(--second-color);
+                font-size: var(--normal-font-size);
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+
+    &:hover .submenu {
+        display: flex;
+    }
+
+    &.active .submenu {
+        display: flex;
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
